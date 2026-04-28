@@ -3,7 +3,7 @@ const mineflayer = require('mineflayer')
 const bot = mineflayer.createBot({
   host: 'kingmc.vn',
   username: 'manhquang',
-  version: '1.21.0'
+  version: false
 })
 
 bot.on('spawn', () => {
@@ -14,8 +14,14 @@ bot.on('messagestr', (msg) => {
   if (msg.includes('/register')) {
     bot.chat('/register quang123 quang123')
   }
-
   if (msg.includes('/login')) {
     bot.chat('/login quang123')
   }
 })
+
+setInterval(() => {
+  if (bot.entity) {
+    bot.setControlState('jump', true)
+    setTimeout(() => bot.setControlState('jump', false), 500)
+  }
+}, 10000)
